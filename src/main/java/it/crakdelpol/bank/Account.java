@@ -29,16 +29,16 @@ public class Account implements AccountService {
     public void printStatement() {
 
         // standard header of table
-        String FIRST_LINE = "Date || Amount || Balance";
+        String firstLine = "Date || Amount || Balance";
 
-        System.out.println(FIRST_LINE);
+        System.out.println(firstLine);
 
         // necessary to calculate balance
         AtomicInteger balance = new AtomicInteger(0);
 
         // create a list of string will be printed
         List<String> transactionListString = transactions.stream().map( transaction ->
-                transaction.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString() + " || " + transaction.getAmount() + " || " + balance.addAndGet(transaction.getAmount())
+                transaction.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " || " + transaction.getAmount() + " || " + balance.addAndGet(transaction.getAmount())
         ).collect(Collectors.toList());
 
         // reverse order of transaction
