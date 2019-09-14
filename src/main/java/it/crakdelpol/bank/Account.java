@@ -1,11 +1,13 @@
 package it.crakdelpol.bank;
 
+import it.crakdelpol.bank.enitity.Transaction;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class Account implements AccountService {
 
-    private List transactions;
+    private List<Transaction> transactions;
 
     public Account(List transactions){
         this.transactions = transactions;
@@ -13,7 +15,11 @@ public class Account implements AccountService {
 
 
     protected void deposit(int amount, LocalDate date){
-        throw new UnsupportedOperationException();
+
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amount);
+        transaction.setDate(date);
+        this.transactions.add(transaction);
 
     }
     public void deposit(int amount) {

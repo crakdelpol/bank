@@ -43,14 +43,14 @@ public class AccountTest {
     public void deposit() {
         this.account.deposit(200);
 
-        Assert.assertEquals(1, list);
+        Assert.assertEquals(1, list.size());
     }
 
 
     @Test
     public void withdraw() {
         this.account.withdraw(500);
-        Assert.assertEquals(1, list);
+        Assert.assertEquals(1, list.size());
     }
 
     @Test
