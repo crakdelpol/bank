@@ -3,7 +3,12 @@ package it.crakdelpol.bank;
 import it.crakdelpol.bank.enitity.Transaction;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.reverse;
 
 public class Account implements AccountService {
 
@@ -13,16 +18,8 @@ public class Account implements AccountService {
         this.transactions = transactions;
     }
 
-
-    protected void deposit(int amount, LocalDate date){
-        createTransaction(amount, date);
-    }
     public void deposit(int amount) {
         this.deposit(amount, LocalDate.now());
-    }
-
-    protected void withdraw(int amount, LocalDate date){
-        createTransaction(-amount, date);
     }
 
     public void withdraw(int amount) {
@@ -30,7 +27,34 @@ public class Account implements AccountService {
     }
 
     public void printStatement() {
-        throw new UnsupportedOperationException();
+
+        // standard header of table
+        String FIRST_LINE = "Date || Amount || Balance";
+
+        System.out.println(FIRST_LINE);
+
+        // necessary to calculate balance
+        AtomicInteger balance = new AtomicInteger(0);
+
+        // create a list of string will be printed
+        List<String> transactionListString = transactions.stream().map( transaction ->
+                transaction.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")).toString() + " || " + transaction.getAmount() + " || " + balance.addAndGet(transaction.getAmount())
+        ).collect(Collectors.toList());
+
+        // reverse order of transaction
+        reverse(transactionListString);
+
+        // and print balance
+        transactionListString.forEach(System.out::println);
+
+    }
+
+    void deposit(int amount, LocalDate date){
+        createTransaction(amount, date);
+    }
+
+    void withdraw(int amount, LocalDate date){
+        createTransaction(-amount, date);
     }
 
     private void createTransaction(int amount, LocalDate date){
@@ -40,4 +64,5 @@ public class Account implements AccountService {
         transaction.setDate(date);
         this.transactions.add(transaction);
     }
+
 }

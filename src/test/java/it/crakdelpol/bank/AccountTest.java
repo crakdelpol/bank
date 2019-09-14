@@ -29,7 +29,7 @@ public class AccountTest {
 
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
-        this.list = new ArrayList();
+        this.list = new ArrayList<>();
         this.account = new Account(list);
     }
 
@@ -64,20 +64,20 @@ public class AccountTest {
     public void printStatement() {
 
         this.account.printStatement();
-        assertEquals("", outContent.toString());
+        assertEquals("Date || Amount || Balance\n", outContent.toString());
     }
 
     @Test
     public void finalTestRequired(){
 
         this.account.deposit(1000, LocalDate.parse("2012-01-10"));
-        this.account.deposit(2000, LocalDate.parse("2012-01-10"));
-        this.account.withdraw(500, LocalDate.parse("2012-01-13"));
+        this.account.deposit(2000, LocalDate.parse("2012-01-13"));
+        this.account.withdraw(500, LocalDate.parse("2012-01-14"));
         this.account.printStatement();
-        assertEquals("Date       || Amount || Balance\n" +
-                "14/01/2012 || -500   || 2500\n" +
-                "13/01/2012 || 2000   || 3000\n" +
-                "10/01/2012 || 1000   || 1000", outContent.toString());
+        assertEquals("Date || Amount || Balance\n" +
+                "14/01/2012 || -500 || 2500\n" +
+                "13/01/2012 || 2000 || 3000\n" +
+                "10/01/2012 || 1000 || 1000\n", outContent.toString());
 
     }
 }
