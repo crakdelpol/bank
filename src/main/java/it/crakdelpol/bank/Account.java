@@ -15,19 +15,14 @@ public class Account implements AccountService {
 
 
     protected void deposit(int amount, LocalDate date){
-
-        Transaction transaction = new Transaction();
-        transaction.setAmount(amount);
-        transaction.setDate(date);
-        this.transactions.add(transaction);
-
+        createTransaction(amount, date);
     }
     public void deposit(int amount) {
         this.deposit(amount, LocalDate.now());
     }
 
     protected void withdraw(int amount, LocalDate date){
-        throw new UnsupportedOperationException();
+        createTransaction(-amount, date);
     }
 
     public void withdraw(int amount) {
@@ -36,5 +31,13 @@ public class Account implements AccountService {
 
     public void printStatement() {
         throw new UnsupportedOperationException();
+    }
+
+    private void createTransaction(int amount, LocalDate date){
+
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amount);
+        transaction.setDate(date);
+        this.transactions.add(transaction);
     }
 }

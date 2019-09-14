@@ -1,5 +1,6 @@
 package it.crakdelpol.bank;
 
+import it.crakdelpol.bank.enitity.Transaction;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,7 +20,7 @@ public class AccountTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-    private ArrayList list;
+    private ArrayList<Transaction> list;
 
     private Account account;
 
@@ -41,16 +42,22 @@ public class AccountTest {
 
     @Test
     public void deposit() {
-        this.account.deposit(200);
+
+        int amount = 200;
+        this.account.deposit(amount);
 
         Assert.assertEquals(1, list.size());
+        Assert.assertEquals(amount, list.get(0).getAmount() );
+
     }
 
 
     @Test
     public void withdraw() {
-        this.account.withdraw(500);
+        int amount = 500;
+        this.account.withdraw(amount);
         Assert.assertEquals(1, list.size());
+        Assert.assertEquals(-amount, list.get(0).getAmount());
     }
 
     @Test
