@@ -61,6 +61,14 @@ public class AccountTest {
     }
 
     @Test
+    public void negativeWithdraw() {
+        int amount = 500;
+        this.account.withdraw(-amount);
+        Assert.assertEquals(1, list.size());
+        Assert.assertEquals(-amount, list.get(0).getAmount());
+    }
+
+    @Test
     public void printStatement() {
 
         this.account.printStatement();
