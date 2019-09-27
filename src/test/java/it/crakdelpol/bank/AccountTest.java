@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -60,7 +61,8 @@ public class AccountTest {
         Assert.assertEquals(-amount, list.get(0).getAmount());
     }
 
-    @Test
+
+    @Test(expected = IllegalArgumentException.class)
     public void negativeWithdraw() {
         int amount = 500;
         this.account.withdraw(-amount);

@@ -1,6 +1,7 @@
 package it.crakdelpol.bank;
 
 import it.crakdelpol.bank.enitity.Transaction;
+import it.crakdelpol.bank.utils.Args;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -54,6 +55,7 @@ public class Account implements AccountService {
     }
 
     void withdraw(int amount, LocalDate date){
+        Args.checkForPositive(amount);
         createTransaction(-amount, date);
     }
 
