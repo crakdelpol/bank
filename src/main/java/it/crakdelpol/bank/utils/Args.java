@@ -1,7 +1,5 @@
 package it.crakdelpol.bank.utils;
 
-import java.util.regex.*;
-
 /**
  Utility methods for common argument validations.
 
