@@ -73,7 +73,7 @@ public class AccountTest {
     public void printStatement() {
 
         this.account.printStatement();
-        assertEquals("Date || Amount || Balance\n", outContent.toString());
+        assertEquals(sanitizeNesLine("Date || Amount || Balance\n"), sanitizeNesLine(outContent.toString()));
     }
 
     @Test
@@ -83,10 +83,14 @@ public class AccountTest {
         this.account.deposit(2000, LocalDate.parse("2012-01-13"));
         this.account.withdraw(500, LocalDate.parse("2012-01-14"));
         this.account.printStatement();
-        assertEquals("Date || Amount || Balance\n" +
+        assertEquals(sanitizeNesLine("Date || Amount || Balance\n" +
                 "14/01/2012 || -500 || 2500\n" +
                 "13/01/2012 || 2000 || 3000\n" +
-                "10/01/2012 || 1000 || 1000\n", outContent.toString());
+                "10/01/2012 || 1000 || 1000\n"), sanitizeNesLine(outContent.toString()));
 
+    }
+
+    private static String sanitizeNesLine(String stringToSanitize){
+        return  stringToSanitize.replaceAll("\r", "").replaceAll("\n", "");
     }
 }
