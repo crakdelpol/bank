@@ -1,4 +1,4 @@
-package it.crakdelpol.bank.enitity;
+package it.crakdelpol.bank.entity;
 
 import lombok.*;
 

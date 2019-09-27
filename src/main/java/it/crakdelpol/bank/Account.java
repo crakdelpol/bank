@@ -1,6 +1,6 @@
 package it.crakdelpol.bank;
 
-import it.crakdelpol.bank.enitity.Transaction;
+import it.crakdelpol.bank.entity.Transaction;
 import it.crakdelpol.bank.utils.Args;
 
 import java.time.LocalDate;
